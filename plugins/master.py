@@ -4,11 +4,11 @@ import shutil
 import os
 from master import masterdl
 
-@bot.on_message(filters.command("txt"))#Here You Can Change Command
+@bot.on_message(filters.command("txt")) # Here You Can Change Command
 async def account_login(bot, m):
     try:
         Credit = Config.CREDIT
-        editable = await m.reply_text('__Send 🗂️Master TXT🗂️ file for download__')
+        editable = await m.reply_text('__Send 📂Master TXT📂 file for download__')
         input = await bot.listen(chat_id=m.chat.id)
         path = f"./downloads/{m.chat.id}"
         temp_dir = "./temp"
@@ -19,7 +19,7 @@ async def account_login(bot, m):
         await editable.edit(f"Total links🔗 found are __{len(links)}__\n\nSend From where you want to download initial is __1__")
         if m.chat.id not in Config.AUTH_USERS:
             print(f"User ID not in AUTH_USERS", m.chat.id)
-            await bot.send_message(m.chat.id, f"__Oopss! You are not a Premium member __\n\n__PLEASE UPGRADE YOUR PLAN__\n\n**/upgrade for Plan Details**\n__Send me your user id for authorization your User id__ -     `{m.chat.id}`\n\n__Sab kuch free me chahiye kya__")
+            await bot.send_message(m.chat.id, f"__Oopss! You are not a Premium member __\n\n__PLEASE UPGRADE YOUR PLAN__\n\n**/upgrade for Plan Details**\n__Send me your user id for authorization__\n")
             return
         input0=await bot.listen(chat_id=m.chat.id)
         raw_text = input0.text
@@ -39,7 +39,7 @@ async def account_login(bot, m):
         raw_text2 = input2.text
         await input2.delete(True)
 
-        await editable.edit(f"__ᴇɴᴛᴇʀ ʏᴏᴜʀ ɴᴀᴍᴇ ᴏʀ ꜱᴇɴᴅ `1` ꜰᴏʀ ᴜꜱᴇ ᴅᴇꜰᴀᴜʟᴛ__\n\nEg : Dᴏᴡɴʟᴏᴀᴅ Bʏ : `{Credit}`")
+        await editable.edit(f"__Enter your name or send `1` for using default__\n\nEg : Download By : `{Credit}`")
         input3=await bot.listen(chat_id=m.chat.id)
         raw_text3 = input3.text
         await input3.delete(True)
@@ -69,11 +69,10 @@ async def account_login(bot, m):
         try:
             await bot.send_message(chat_id=channel_id, text=f'🎯**Target Batch - {b_name}**')
         except Exception as e:
-            await m.reply_text(f"**Please remake a admin in channel..**\n\n**Bot Made By** 🔰『{king}🔰")
+            await m.reply_text(f"**Please remake a admin in channel..**\n\n**Bot Made By** 🛠️『{king}』")
             channel_id=m.chat.id
         await editable.delete()
         await masterdl.process_links(links, raw_text, raw_text2, token, b_name, MR, channel_id, bot, m, path, thumb, Credit)
     except Exception as e:
-        await m.reply_text(f"**⚠️Downloading Failed⚠️**\n\n**Fail Reason »** {e}\n\n**╰────⌈✨ 『{king}』 ✨**⌋────╯")
+        await m.reply_text(f"**⚠️Downloading Failed⚠️**\n\n**Fail Reason »** {e}\n\n**└───⌈✨ 『{king}』 ✨⌋───┘**")
         return
-    
