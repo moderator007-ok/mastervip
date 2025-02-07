@@ -1,7 +1,5 @@
 from config import Config
-
-from pyrogram import Client as bot, idle  # No indentation issue here
-
+from pyrogram import Client as bot, idle
 import asyncio
 import logging
 
@@ -43,6 +41,5 @@ if __name__ == "__main__":
 
         await idle()
 
-    asyncio.run(main())  # Instead of deprecated get_event_loop()
-
-    LOGGER.info("<---🦅 OK 😌💞 --->")
+    asyncio.run(main())
+    LOGGER.info("<---🦄 OK 😌💞 --->")
