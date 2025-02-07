@@ -17,16 +17,13 @@ async def account_login(bot, m):
         os.makedirs(temp_dir)
         links, file_name = await masterdl.process_text_file_or_input(input)
         await editable.edit(f"Total links🔗 found are __{len(links)}__\n\nSend From where you want to download initial is __1__")
-        if m.chat.id not in Config.AUTH_USERS:
-            print(f"User ID not in AUTH_USERS", m.chat.id)
-            await bot.send_message(m.chat.id, f"__Oopss! You are not a Premium member __\n\n__PLEASE UPGRADE YOUR PLAN__\n\n**/upgrade for Plan Details**\n__Send me your user id for authorization__\n")
-            return
-        input0=await bot.listen(chat_id=m.chat.id)
+
+        input0 = await bot.listen(chat_id=m.chat.id)
         raw_text = input0.text
         await input0.delete(True)
 
         await editable.edit("__Enter Batch Name or send 1 for grabbing from text filename.__")
-        input1=await bot.listen(chat_id=m.chat.id)
+        input1 = await bot.listen(chat_id=m.chat.id)
         raw_text0 = input1.text
         await input1.delete(True)
         if raw_text0 == '1':
@@ -35,12 +32,12 @@ async def account_login(bot, m):
             b_name = raw_text0
 
         await editable.edit("__Enter resolution \n\nEg - `360` or `480` or `720`")
-        input2=await bot.listen(chat_id=m.chat.id)
+        input2 = await bot.listen(chat_id=m.chat.id)
         raw_text2 = input2.text
         await input2.delete(True)
 
         await editable.edit(f"__Enter your name or send `1` for using default__\n\nEg : Download By : `{Credit}`")
-        input3=await bot.listen(chat_id=m.chat.id)
+        input3 = await bot.listen(chat_id=m.chat.id)
         raw_text3 = input3.text
         await input3.delete(True)
         if raw_text3 == '1':
@@ -53,12 +50,12 @@ async def account_login(bot, m):
         token = input4.text
         await input4.delete(True)
         await editable.edit("Now send the __Thumb URL__\nEg : `https://tinypic.host/images/2025/01/21/Purvi-Cid.jpg`\n\nor Send `no`")
-        input6=await bot.listen(chat_id=m.chat.id)
+        input6 = await bot.listen(chat_id=m.chat.id)
         thumb = input6.text
         await input6.delete(True)
-        
+
         await editable.edit("__Please Provide Channel id or where you want to Upload video or Sent Video otherwise `1` __\n\n__And make me admin in this channel then i can able to Upload otherwise i can't__")
-        input7=await bot.listen(chat_id=m.chat.id)
+        input7 = await bot.listen(chat_id=m.chat.id)
         if "1" in input7.text:
             channel_id = m.chat.id
         else:
@@ -70,7 +67,7 @@ async def account_login(bot, m):
             await bot.send_message(chat_id=channel_id, text=f'🎯**Target Batch - {b_name}**')
         except Exception as e:
             await m.reply_text(f"**Please remake a admin in channel..**\n\n**Bot Made By** 🛠️『{king}』")
-            channel_id=m.chat.id
+            channel_id = m.chat.id
         await editable.delete()
         await masterdl.process_links(links, raw_text, raw_text2, token, b_name, MR, channel_id, bot, m, path, thumb, Credit)
     except Exception as e:
