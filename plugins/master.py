@@ -4,7 +4,7 @@ import shutil
 import os
 from master import masterdl
 
-@bot.on_message(filters.command("maya"))#Here You Can Change Command
+@bot.on_message(filters.command("txt"))#Here You Can Change Command
 async def account_login(bot, m):
     try:
         Credit = Config.CREDIT
