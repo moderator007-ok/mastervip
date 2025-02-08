@@ -86,11 +86,8 @@ async def account_login(bot, m):
             channel_id = m.chat.id
         await editable.delete()
 
-        # Ensure that process_links is awaited if it's a coroutine
-        if hasattr(masterdl.process_links, "__await__"):
-            await masterdl.process_links(links, raw_text, raw_text2, token, b_name, MR, channel_id, bot, m, path, thumb, Credit)
-        else:
-            masterdl.process_links(links, raw_text, raw_text2, token, b_name, MR, channel_id, bot, m, path, thumb, Credit)
+        # Ensure that process_links is awaited
+        await masterdl.process_links(links, raw_text, raw_text2, token, b_name, MR, channel_id, bot, m, path, thumb, Credit)
     except Exception as e:
         logging.error(f"Downloading failed: {e}")
         await m.reply_text(f"**⚠️Downloading Failed⚠️**\n\n**Fail Reason »** {e}\n\n**└───⌈✨ 『{king}』 ✨⌋───┘**")
