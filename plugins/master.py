@@ -86,7 +86,9 @@ async def account_login(bot, m):
             channel_id = m.chat.id
         await editable.delete()
 
-        # Ensure that process_links is awaited
+        # Ensure that process_links is awaited properly
+        if not callable(masterdl.process_links):
+            raise TypeError("masterdl.process_links must be an awaitable function")
         await masterdl.process_links(links, raw_text, raw_text2, token, b_name, MR, channel_id, bot, m, path, thumb, Credit)
     except Exception as e:
         logging.error(f"Downloading failed: {e}")
