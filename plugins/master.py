@@ -8,8 +8,9 @@ from master import masterdl
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-@bot.on_message(filters.command("txt")) # Here You Can Change Command
+@bot.on_message(filters.command("txt"))  # Here You Can Change Command
 async def account_login(bot, m):
+    king = "YourKingName"  # Define the variable 'king' here
     try:
         logging.info("Command '/txt' received")
         Credit = Config.CREDIT
@@ -84,7 +85,12 @@ async def account_login(bot, m):
             await m.reply_text(f"**Please remake a admin in channel..**\n\n**Bot Made By** 🛠️『{king}』")
             channel_id = m.chat.id
         await editable.delete()
-        await masterdl.process_links(links, raw_text, raw_text2, token, b_name, MR, channel_id, bot, m, path, thumb, Credit)
+
+        # Ensure that process_links is awaited if it's a coroutine
+        if hasattr(masterdl.process_links, "__await__"):
+            await masterdl.process_links(links, raw_text, raw_text2, token, b_name, MR, channel_id, bot, m, path, thumb, Credit)
+        else:
+            masterdl.process_links(links, raw_text, raw_text2, token, b_name, MR, channel_id, bot, m, path, thumb, Credit)
     except Exception as e:
         logging.error(f"Downloading failed: {e}")
         await m.reply_text(f"**⚠️Downloading Failed⚠️**\n\n**Fail Reason »** {e}\n\n**└───⌈✨ 『{king}』 ✨⌋───┘**")
